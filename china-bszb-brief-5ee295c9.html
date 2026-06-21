@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bszb · 信息聚合与主题解读</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f9fc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1c2e3a;
+      line-height: 1.5;
+      padding: 0 16px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 40px 20px;
+      background: linear-gradient(145deg, #e3f0f5 0%, #f7fcff 100%);
+      border-radius: 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 20px rgba(18, 95, 112, 0.06);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0a3b44;
+      line-height: 1.2;
+      max-width: 720px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(130deg, #0a7b8c, #36b3c4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #2f4b56;
+      margin: 18px 0 28px;
+      max-width: 600px;
+      border-left: 4px solid #36b3c4;
+      padding-left: 20px;
+    }
+
+    /* 特性网格卡片 */
+    .section-title {
+      font-size: 1.7rem;
+      font-weight: 450;
+      margin: 48px 0 24px;
+      color: #0a3b44;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #c9e0e8;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px 18px;
+      box-shadow: 0 4px 14px rgba(0, 50, 60, 0.04);
+      transition: transform 0.15s, box-shadow 0.15s;
+      border: 1px solid #dbeef3;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 80, 90, 0.08);
+      border-color: #36b3c4;
+    }
+
+    .card .icon {
+      display: inline-block;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      background: #eaf6fa;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      border-radius: 18px;
+      color: #0a7b8c;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #0b3f4a;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #3d5e6a;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ccebf2;
+      color: #065a68;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 40px;
+      letter-spacing: 0.01em;
+      margin-top: 12px;
+    }
+
+    /* 说明区 (主题展开) */
+    .exposition {
+      background: #ffffffd6;
+      backdrop-filter: blur(2px);
+      padding: 32px 28px;
+      border-radius: 28px;
+      margin: 20px 0 40px;
+      border: 1px solid #d4e7ed;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .exposition .text-section {
+      flex: 2;
+      min-width: 220px;
+    }
+
+    .exposition .highlight-box {
+      flex: 1;
+      background: #e1f2f7;
+      padding: 20px 18px;
+      border-radius: 20px;
+      min-width: 180px;
+    }
+
+    .exposition h2 {
+      font-size: 1.5rem;
+      font-weight: 450;
+      margin-bottom: 16px;
+      color: #08424e;
+    }
+
+    .exposition p {
+      margin-bottom: 12px;
+      color: #2a4956;
+    }
+
+    .highlight-box p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .highlight-box .stat {
+      font-size: 2rem;
+      font-weight: 350;
+      color: #0a7b8c;
+      line-height: 1.2;
+    }
+
+    /* FAQ 摘要 折叠样式 */
+    .faq-summary {
+      background: white;
+      border-radius: 28px;
+      padding: 24px 24px 16px;
+      margin: 24px 0 32px;
+      border: 1px solid #d0e4eb;
+    }
+
+    .faq-summary details {
+      border-bottom: 1px solid #e2eff3;
+      padding: 14px 0;
+    }
+
+    .faq-summary details:last-of-type {
+      border-bottom: none;
+    }
+
+    .faq-summary summary {
+      font-weight: 500;
+      cursor: pointer;
+      color: #09424e;
+      font-size: 1.05rem;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-summary summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: #36b3c4;
+      transition: 0.2s;
+    }
+
+    .faq-summary details[open] summary::after {
+      content: '–';
+    }
+
+    .faq-summary .answer {
+      color: #315a67;
+      padding: 12px 0 6px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .faq-link {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    /* 底部链接 */
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 0 20px;
+      border-top: 1px solid #cde1e8;
+      margin-top: 20px;
+      color: #2e5a68;
+    }
+
+    .footer-links a {
+      color: #0a6d7c;
+      text-decoration: none;
+      font-weight: 450;
+      border-bottom: 1px dotted transparent;
+      transition: 0.15s;
+    }
+
+    .footer-links a:hover {
+      border-bottom-color: #36b3c4;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .inline-link {
+      color: #0a6d7c;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: #9acbd6;
+      font-weight: 450;
+    }
+
+    .inline-link:hover {
+      text-decoration-color: #0a7b8c;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        min-height: 50vh;
+        padding: 32px 16px;
+      }
+
+      .exposition {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- hero -->
+  <section class="hero">
+    <h1>围绕 <span>bszb</span> 的主题内容聚合</h1>
+    <p>从关键词到知识结构，提供领域内信息索引与解读。不止于词条，更侧重关联与深度。</p>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <span style="background:#dbeef3; padding:6px 18px; border-radius:40px; font-size:0.85rem; color:#075566;">信息密度 · 主题展开</span>
+      <span style="background:#dbeef3; padding:6px 18px; border-radius:40px; font-size:0.85rem; color:#075566;">结构化索引</span>
+    </div>
+  </section>
+
+  <!-- 优势区：网格卡片 -->
+  <h2 class="section-title">结构·线索·延伸</h2>
+  <div class="grid-cards">
+    <div class="card">
+      <div class="icon">📌</div>
+      <h3>主题锚点</h3>
+      <p>每个关键词背后都有一组概念网络，bszb 作为核心锚点，串联起相关领域脉络。</p>
+      <span class="badge">关联索引</span>
+    </div>
+    <div class="card">
+      <div class="icon">🧩</div>
+      <h3>模块化阅读</h3>
+      <p>按信息层级拆分，从概述到细节，允许按需浏览，而非线性长文。</p>
+      <span class="badge">卡片式</span>
+    </div>
+    <div class="card">
+      <div class="icon">🔎</div>
+      <h3>交叉参照</h3>
+      <p>内容之间设置显式链接，方便在不同主题之间跳转，形成知识图谱。</p>
+      <span class="badge">网状结构</span>
+    </div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>要点提炼</h3>
+      <p>每个板块附带摘要或关键数据，减少信息噪声，适合快速查阅。</p>
+      <span class="badge">摘要式</span>
+    </div>
+  </div>
+
+  <!-- 说明区：主题内容展开 -->
+  <div class="exposition">
+    <div class="text-section">
+      <h2>从关键词到主题场域</h2>
+      <p>“bszb”并不仅是一个孤立标识，它指向一个由术语、实践、案例共同构成的语义空间。在此页面中，我们将该主题拆解为几个维度：背景溯源、核心概念、典型应用、以及常见疑问。</p>
+      <p>每一个维度下都包含多层信息，从宏观定义到微观操作，我们尝试用稳定的结构承载不断更新的内容。同时通过交叉链接保持整体感，避免碎片化。</p>
+      <p>你可以将这一页面视为一个动态的知识起点 —— 所有内容都围绕 <a href="https://china-bszb.com" class="inline-link">bszb</a> 展开，并持续演化。</p>
+    </div>
+    <div class="highlight-box">
+      <p class="stat">4+</p>
+      <p>主题维度</p>
+      <p class="stat">30+</p>
+      <p>内部关联条目</p>
+      <p style="margin-top: 10px; font-size:0.85rem; color:#1c6c7a;">持续丰富中</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-summary">
+    <h3 style="font-weight:450; color:#08424e; margin-bottom:6px;">常见问题摘要</h3>
+    <details>
+      <summary>bszb 的内容领域是什么？</summary>
+      <div class="answer">该主题涵盖特定知识领域的术语、方法与实践案例，整体侧重信息整合与多角度解读，不限于单一学科。</div>
+    </details>
+    <details>
+      <summary>内容更新频率如何？</summary>
+      <div class="answer">根据主题演化与用户反馈进行不定期修订与扩充，保持内容的相关性和准确性为主。</div>
+    </details>
+    <details>
+      <summary>是否支持引用或二次传播？</summary>
+      <div class="answer">页面内容以参考和索引为目的，引用时建议注明出处。详细使用条款可参阅站点说明。</div>
+    </details>
+    <div class="faq-link">
+      <a href="https://china-bszb.com" class="inline-link">bszb</a> · 查看更多
+    </div>
+  </div>
+
+  <!-- 底部链接 -->
+  <div class="footer-links">
+    <span class="footer-tagline">主题索引 · 结构化阅读</span>
+    <span>
+      <a href="https://china-bszb.com">bszb</a>
+    </span>
+  </div>
+</div>
+</body>
+</html>
