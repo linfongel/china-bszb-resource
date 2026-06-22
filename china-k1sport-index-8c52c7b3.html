@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>k1体育 · 简明指南与访问提醒</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f4f6fa;
+      color: #1e2a3a;
+      line-height: 1.65;
+    }
+
+    /* 深色头图 */
+    .hero {
+      background: linear-gradient(135deg, #0b1a2e 0%, #1b2f47 100%);
+      color: #e7edf5;
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero .sub {
+      font-size: 1.05rem;
+      color: #b2c5da;
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: #d97706;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+    }
+
+    /* 正文区 浅色背景 */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    /* 目录感布局 —— 卡片网格 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e9edf2;
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #0b1a2e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h3 i {
+      font-style: normal;
+      background: #eef2f7;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #d97706;
+    }
+
+    .card p, .card ul {
+      font-size: 0.95rem;
+      color: #2c3e50;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card ul li {
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .card ul li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #d97706;
+    }
+
+    .highlight-link {
+      color: #d97706;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dashed rgba(217, 119, 6, 0.3);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .highlight-link:hover {
+      color: #b86204;
+      border-bottom-color: #b86204;
+    }
+
+    /* 提示区 / 说明区 */
+    .notice-box {
+      background: #eef2f7;
+      border-left: 5px solid #d97706;
+      padding: 18px 22px;
+      border-radius: 12px;
+      margin: 32px 0 24px;
+      font-size: 0.95rem;
+    }
+
+    .notice-box strong {
+      color: #0b1a2e;
+    }
+
+    .info-block {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px 24px;
+      border: 1px solid #e9edf2;
+      margin: 20px 0 32px;
+    }
+
+    .info-block h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #0b1a2e;
+    }
+
+    .info-block p {
+      font-size: 0.95rem;
+      color: #2c3e50;
+    }
+
+    /* FAQ 摘要 — 简洁条目 */
+    .faq-mini {
+      margin: 24px 0 10px;
+    }
+
+    .faq-item {
+      display: flex;
+      padding: 12px 0;
+      border-bottom: 1px solid #e9edf2;
+      gap: 16px;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      color: #0b1a2e;
+      min-width: 100px;
+      font-size: 0.92rem;
+    }
+
+    .faq-a {
+      color: #3b4b5e;
+      font-size: 0.92rem;
+    }
+
+    .faq-a a {
+      color: #d97706;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .faq-a a:hover {
+      text-decoration: underline;
+    }
+
+    /* 分隔与脚注 */
+    .footnote {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #dce2ec;
+      font-size: 0.82rem;
+      color: #5a6f84;
+      text-align: center;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      .hero {
+        padding: 48px 20px 40px;
+      }
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .faq-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .faq-q {
+        min-width: unset;
+      }
+      .card {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <section class="hero">
+    <h1>k1体育 · 简明指南</h1>
+    <p class="sub">从基础认知到顺畅访问，信息密度适中，侧重实用提醒与资源索引。</p>
+    <span class="badge">知识库入口式 · 目录感</span>
+  </section>
+
+  <!-- 正文浅色区 -->
+  <div class="container">
+
+    <!-- 卡片网格：介绍 + 特点 -->
+    <div class="grid-2">
+      <div class="card">
+        <h3><i>01</i> 平台简介</h3>
+        <p><a href="https://china-k1sport.com" class="highlight-link">k1体育</a> 定位于综合性体育信息与互动平台，覆盖多项运动类别及实时数据。站内结构以赛事资讯、数据统计和社区讨论为核心，面向具备一定体育认知的用户。页面设计追求信息层级清晰，减少冗余跳转。</p>
+      </div>
+      <div class="card">
+        <h3><i>02</i> 内容特点</h3>
+        <ul>
+          <li>赛事日程与结果聚合，更新频率较高</li>
+          <li>多维度数据对比，辅助用户判断</li>
+          <li>社区讨论区按运动项目细分</li>
+          <li>移动端适配，基础功能完整</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 说明区：简明访问指引 -->
+    <div class="notice-box">
+      <strong>📌 访问提醒：</strong> 由于网络环境与地区差异，部分用户可能遇到连接延迟或页面加载不稳定。建议优先使用主流浏览器（Chrome / Edge 最新版），并确保网络连接正常。如遇临时不可用，可稍后重试。平台官方域名为 <a href="https://china-k1sport.com" class="highlight-link">k1体育</a>，请注意核对。
+    </div>
+
+    <!-- 相关信息区：FAQ 摘要 + 使用场景 -->
+    <div class="info-block">
+      <h4>📖 常见问题摘要（FAQ）</h4>
+      <div class="faq-mini">
+        <div class="faq-item">
+          <span class="faq-q">是否需要注册？</span>
+          <span class="faq-a">浏览基础资讯与赛事数据无需注册。参与评论或收藏内容需创建账户，流程约两分钟。</span>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">数据更新节奏？</span>
+          <span class="faq-a">主流赛事实时更新，常规数据每日同步。历史数据可追溯至近三个赛季。</span>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">移动端体验？</span>
+          <span class="faq-a">响应式设计覆盖手机与平板，核心功能与桌面端一致。部分深度筛选建议在宽屏下使用。</span>
+        </div>
+        <div class="faq-item">
+          <span class="faq-q">遇到访问问题？</span>
+          <span class="faq-a">可尝试切换网络或清除缓存。仍无法访问时，通过站内反馈渠道描述具体情况。更多信息请直接访问 <a href="https://china-k1sport.com">k1体育</a>。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 提示区：场景与建议（信息密度稍高） -->
+    <div class="grid-2">
+      <div class="card">
+        <h3><i>03</i> 典型使用场景</h3>
+        <p>赛前查看双方近期数据与交锋记录；赛中追踪实时比分与关键事件；赛后查阅技术统计及社区讨论。适合体育爱好者、数据分析型用户及赛事关注者日常使用。</p>
+      </div>
+      <div class="card">
+        <h3><i>04</i> 浏览建议</h3>
+        <ul>
+          <li>利用站内搜索快速定位特定赛事或队伍</li>
+          <li>关注「热门讨论」板块获取社区动态</li>
+          <li>定期清理浏览器缓存以保持页面响应</li>
+          <li>如使用代理，请选择延迟较低的地区节点</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 额外的说明：关于内容克制与真实 -->
+    <div class="notice-box" style="background: #f9fafc; border-left-color: #4b6a8b;">
+      <strong>ℹ️ 信息说明：</strong> 本页仅作功能概述与访问指引，不包含任何竞技预测、投资建议或诱导性表述。所有介绍均基于平台公开特性，用户应根据自身判断合理使用。相关细节以 <a href="https://china-k1sport.com" class="highlight-link">k1体育</a> 实际页面为准。
+    </div>
+
+    <!-- 脚注 -->
+    <div class="footnote">
+      知识库入口式布局 · 版本 2405 · 内容定期校准
+    </div>
+  </div>
+
+</body>
+</html>
